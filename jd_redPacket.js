@@ -24,7 +24,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
-$.redPacketId = ['373246289'];
+$.redPacketId = [];
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -85,6 +85,20 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
         if ($.max) {
           $.redPacketId.splice(j, 1)
           j--
+          continue
+        }
+      }
+    }
+    if ($.canHelp && ($.authorMyShareIds && $.authorMyShareIds.length)) {
+      //console.log(`\n\n有剩余助力机会则给作者进行助力`);
+      for (let j = 0; j < $.authorMyShareIds.length && $.canHelp; j++) {
+        //console.log(`\n账号 ${$.index} ${$.UserName} 开始给作者 ${$.authorMyShareIds[j]} 进行助力`)
+        $.max = false;
+        //await jinli_h5assist($.authorMyShareIds[j]);
+        await $.wait(2000)
+        if ($.max) {
+          //$.authorMyShareIds.splice(j, 1)
+          //j--
           continue
         }
       }

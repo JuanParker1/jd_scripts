@@ -10,7 +10,7 @@
 ============Quantumultx===============
 [task_local]
 #10.20~11.13 选品官
-27 4,14 1-13,22-31 10,11 * https://raw.githubusercontent.com/he1pu/JDHelp/main/jd_selectionOfficer.js, tag=10.20~11.13 选品官, enabled=true
+21 2,11 1-13 11 * jd_xpg.js, tag=10.20~11.13 选品官, enabled=true
 
 */
 
@@ -31,7 +31,7 @@ if ($.isNode()) {
         ...$.toObj($.getdata("CookiesJD") || "[]").map((item) => item.cookie)].filter((item) => !!item);
 }
 let authorization = {};
-let invitelist = ['617f4dbfdeb6717611','617f5453a925f41894','6180ae9e8053051235'];
+let invitelist = [];
 !(async () => {
     if (!cookiesArr[0]) {
         $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});

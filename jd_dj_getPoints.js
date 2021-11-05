@@ -6,11 +6,12 @@
 //TG群:https://t.me/passerbyb2021
 
 //[task_local]
-//7 */1 * * * https://raw.githubusercontent.com/passerby-b/JDDJ/main/jddj_getPoints.js
+//7 */1 * * * jd_dj_getPoints.js
 
 
 //[Script]
 //cron "7 */1 * * *" script-path=https://raw.githubusercontent.com/passerby-b/JDDJ/main/jddj_getPoints.js,tag=京东到家鲜豆庄园收水滴
+
 
 const $ = new API("jd_dj_getPoints");
 let ckPath = './jdCookie.js';//ck路径,环境变量:JDDJ_CKPATH

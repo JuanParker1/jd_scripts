@@ -5,6 +5,9 @@
 
 ##############短期活动##############
 
+# 电器盲盒抽京豆 (11.20?)
+0 1,8 1-20 11 * node /scripts/jd_dqmh.js >> /scripts/logs/jd_dqmh.log 2>&1
+
 # 手机竞猜 (不知道是什么鬼 too)
 1 0,9,19,23 * * * node /scripts/jd_nnfls.js >> /scripts/logs/jd_nnfls.log 2>&1
 
@@ -12,7 +15,7 @@
 6 0,7,17 * * * node /scripts/jd_sjjc.js >> /scripts/logs/jd_sjjc.log 2>&1
 
 # 双11特物
-3 9,13,16,19,20 2-8 11 * node /scripts/jd_1111superBrand.js >> /scripts/logs/jd_1111superBrand.log 2>&1
+3 9,13,15,16,19,20 2-8 11 * node /scripts/jd_1111superBrand.js >> /scripts/logs/jd_1111superBrand.log 2>&1
 
 # 跳跳乐瓜分京豆 (什么时候结束)
 1 0,9,15,21 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
@@ -38,9 +41,6 @@
 # 京东手机狂欢城 (11.13 结束)
 6 0-18/6 * 10-11 * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
 
-# 环游记
-13 0,6-23/2 * 10-11 * node /scripts/jd_hyj.js >> /scripts/logs/jd_hyj.log 2>&1
-
 # 预售福利机
 2 0,2 * 10-11 * node /scripts/jd_ys.js >> /scripts/logs/jd_ys.log 2>&1
 
@@ -52,9 +52,6 @@
 
 # 集魔方 (京东APP - 新品 - 集魔方)
 25 0,13 * * * node /scripts/jd_mofang.js >> /scripts/logs/jd_mofang.log 2>&1
-
-# 魔方兑换 (只兑换5魔方)
-9 1,15 * * * node /scripts/jd_mf_exchange.js >> /scripts/logs/jd_mf_exchange.log 2>&1
 
 # 京东小魔方 (9.29 24.00 结束)
 13 0,10 * * * node /scripts/jd_mf.js >> /scripts/logs/jd_mf.log 2>&1
@@ -154,7 +151,7 @@
 # 京东月资产变动通知
 10 9 * * 1 node /scripts/jd_all_bean_change.js >> /scripts/logs/jd_all_bean_change.log 2>&1
 # 京东试用
-16 8 * * * node /scripts/jd_try.js >> /scripts/logs/jd_try.log 2>&1
+16 2 * * * node /scripts/jd_try.js >> /scripts/logs/jd_try.log 2>&1
 # 东东超市兑换奖品
 59 23 * * * node /scripts/jd_blueCoin.js >> /scripts/logs/jd_blueCoin.log 2>&1
 # 摇京豆
@@ -200,7 +197,7 @@
 # 东东工厂
 26 * * * * node /scripts/jd_jdfactory.js >> /scripts/logs/jd_jdfactory.log 2>&1
 # 赚京豆(微信小程序)
-25 0,9,18,23 * * * node /scripts/jd_syj.js >> /scripts/logs/jd_syj.log 2>&1
+25 1,9,18,23 * * * node /scripts/jd_syj.js >> /scripts/logs/jd_syj.log 2>&1
 # 京东快递签到
 32 7 * * * node /scripts/jd_kd.js >> /scripts/logs/jd_kd.log 2>&1
 # 京东汽车(签到满500赛点可兑换500京豆)

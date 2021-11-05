@@ -1,3 +1,4 @@
+
 let common = require("./function/common");
 let $ = new common.env('京喜购物返红包助力');
 let min = 5,

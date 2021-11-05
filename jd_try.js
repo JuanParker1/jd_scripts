@@ -5,7 +5,7 @@
  * 脚本是否耗时只看args_xh.maxLength的大小
  * 上一作者说了每天最多300个商店，总上限为500个，jd_unsubscribe.js我已更新为批量取关版
  * 请提前取关至少250个商店确保京东试用脚本正常运行
- *
+16 2 * * * jd_try.js
  * @Address: https://github.com/X1a0He/jd_scripts_fixed/blob/main/jd_try_xh.js
  * @LastEditors: X1a0He
  */
@@ -233,7 +233,7 @@ let JD_TRY = true
                 }
             }
             if($.isNode()){
-                if($.index % args_xh.sendNum === 0){
+                if($.index % args_xh.sendNum === 0 && notifyMsg != ""){
                     $.sentNum++;
                     console.log(`正在进行第 ${$.sentNum} 次发送通知，发送数量：${args_xh.sendNum}`)
                     await $.notify.sendNotify(`${$.name}`, `${notifyMsg}`)
@@ -242,7 +242,7 @@ let JD_TRY = true
             }
         }
         if($.isNode()){
-            if(($.cookiesArr.length - ($.sentNum * args_xh.sendNum)) < args_xh.sendNum){
+            if(($.cookiesArr.length - ($.sentNum * args_xh.sendNum)) < args_xh.sendNum && notifyMsg != ""){
                 console.log(`正在进行最后一次发送通知，发送数量：${($.cookiesArr.length - ($.sentNum * args_xh.sendNum))}`)
                 await $.notify.sendNotify(`${$.name}`, `${notifyMsg}`)
                 notifyMsg = "";
