@@ -5,6 +5,12 @@
 
 ##############短期活动##############
 
+# 环游记大富翁 (11.11)
+3 3 1-11 11 * node /scripts/jd_travel_shop.js >> /scripts/logs/jd_travel_shop.log 2>&1
+
+# 电器盲盒抽京豆 (11.30?)
+13 3,10,18 * * * node /scripts/jd_vivo.js >> /scripts/logs/jd_vivo.log 2>&1
+
 # 电器盲盒抽京豆 (11.20?)
 0 1,8 1-20 11 * node /scripts/jd_dqmh.js >> /scripts/logs/jd_dqmh.log 2>&1
 
@@ -55,9 +61,6 @@
 
 # 京东小魔方 (9.29 24.00 结束)
 13 0,10 * * * node /scripts/jd_mf.js >> /scripts/logs/jd_mf.log 2>&1
-
-# 芥么赚豪礼
-22 1,13 * * * node /scripts/jd_genz.js >> /scripts/logs/jd_genz.log 2>&1
 
 # 芥末小程序签到领现金 (12.31结束)
 16 9 * * * node /scripts/jd_zsign.js >> /scripts/logs/jd_zsign.log 2>&1
