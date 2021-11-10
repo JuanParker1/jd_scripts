@@ -32,7 +32,7 @@ if ($.isNode()) {
 } else {
   cookiesArr = [$.getdata("CookieJD"), $.getdata("CookieJD2"), ...$.toObj($.getdata("CookiesJD") || "[]").map((item) => item.cookie)].filter((item) => !!item);
 }
-$.packetIdArr = [{"strUserPin":"vqp_lsGAqDrVVWk1AqYwYYnL63Zg8vyeMwujE3dllfLCgZu354Ygen67paPI6P56","userName":"208332482-829664"},{"strUserPin":"vqp_lsGAqDrVVWk1AqYwYYvmIW5KApxNiL2yn0qS7jZmngJLr_w6xqP497fGFB-v","userName":"jd_6a8118a918455"}];
+$.packetIdArr = [{"strUserPin":"7FU_D3FFgK3VqA2v9pHJSYnL63Zg8vyeMwujE3dllfLCgZu354Ygen67paPI6P56","userName":"208332482-829664"},{"strUserPin":"7FU_D3FFgK3VqA2v9pHJSYvmIW5KApxNiL2yn0qS7jZmngJLr_w6xqP497fGFB-v","userName":"jd_6a8118a918455"}];
 $.activeId = '525597';
 const BASE_URL = 'https://m.jingxi.com/cubeactive/steprewardv3'
 !(async () => {
