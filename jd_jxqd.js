@@ -36,13 +36,8 @@ const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
-let UA, UAInfo = {};
-$.shareCodes = [{ 
- 'use': 208332482-829664, 
- 'smp': 50623c2d95da55cd349fff0e18920f23, 
- 'num': 0, 
- 'max': 1 
- } ];
+let UA, UAInfo = {}, isLoginInfo = {};
+$.shareCodes = [];
 $.blackInfo = {}
 $.appId = 10028;
 if ($.isNode()) {
