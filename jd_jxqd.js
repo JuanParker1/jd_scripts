@@ -39,9 +39,7 @@ let cookiesArr = [], cookie = '', message;
 let UA, UAInfo = {}, isLoginInfo = {};
 $.shareCodes = [{ 
  "use":"208332482-829664", 
- "smp":"50623c2d95da55cd349fff0e18920f23", 
- "num":"0", 
- "max":"1" 
+ "smp":"50623c2d95da55cd349fff0e18920f23"
  }];
 $.blackInfo = {}
 $.appId = 10028;
