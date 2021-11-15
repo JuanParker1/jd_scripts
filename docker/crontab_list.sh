@@ -183,8 +183,6 @@
 12 */6 * * * node /scripts/jd_pigPet.js >> /scripts/logs/jd_pigPet.log 2>&1
 # 京喜工厂
 20 * * * * node /scripts/jd_dreamFactory.js >> /scripts/logs/jd_dreamFactory.log 2>&1
-# 东东小窝
-16 0,10 * * * node /scripts/jd_small_home.js >> /scripts/logs/jd_small_home.log 2>&1
 # 东东工厂
 26 * * * * node /scripts/jd_jdfactory.js >> /scripts/logs/jd_jdfactory.log 2>&1
 # 赚京豆(微信小程序)
@@ -244,7 +242,7 @@
 # 京东到家鲜豆庄园收水滴
 0 */1 * * * node /scripts/jd_dj_getPoints.js >> /scripts/logs/jd_dj_getPoints.log 2>&1
 # 京喜财富岛
-6 * * * * node /scripts/jd_cfd.js >> /scripts/logs/jd_cfd.log 2>&1
+20 0,6-23/2 * * * node /scripts/jd_cfd.js >> /scripts/logs/jd_cfd.log 2>&1
 # 京喜财富岛互助
 11 0,1,9,14,18 * * * node /scripts/jd_cfd_help.js >> /scripts/logs/jd_cfd_help.log 2>&1
 # 超级直播间红包雨(活动时间不定期，出现异常提示请忽略。红包雨期间会正常)
