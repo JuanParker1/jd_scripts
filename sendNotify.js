@@ -250,14 +250,14 @@ function wxBOT(text, desp) {
       $.post(options, (err, resp, data) => {
         try {
           if (err) {
-            console.log('企业微信发送通知消息失败！！\n');
+            console.log('微信机器人发送通知消息失败！！\n');
             console.log(err);
           } else {
             data = JSON.parse(data);
             if (data.errcode === 0) {
-              console.log('企业微信发送通知消息成功🎉。\n');
+              console.log('\n\n微信机器人发送通知消息成功🎉。\n');
             } else {
-              console.log(`${data.errmsg}\n`);
+              // console.log(`${data.errmsg}\n`);
             }
           }
         } catch (e) {
@@ -267,7 +267,7 @@ function wxBOT(text, desp) {
         }
       });
     } else {
-      console.log('您未提供企业微信机器人推送所需的QYWX_KEY，取消企业微信推送消息通知🚫\n');
+      // console.log('您未提供微信机器人推送所需的环境变量，取消微信机器人推送消息通知🚫\n');
       resolve();
     }
   });
@@ -296,7 +296,7 @@ function serverNotify(text, desp, time = 2100) {
               data = JSON.parse(data);
               //server酱和Server酱·Turbo版的返回json格式不太一样
               if (data.errno === 0 || data.data.errno === 0 ) {
-                console.log('server酱发送通知消息成功🎉\n')
+                console.log('\n\nserver酱发送通知消息成功🎉\n')
               } else if (data.errno === 1024) {
                 // 一分钟内发送相同的内容会触发
                 console.log(`server酱发送通知消息异常: ${data.errmsg}\n`)
@@ -312,7 +312,7 @@ function serverNotify(text, desp, time = 2100) {
         })
       }, time)
     } else {
-      console.log('\n\n您未提供server酱的SCKEY，取消微信推送消息通知🚫\n');
+      // console.log('\n\n您未提供server酱的SCKEY，取消微信推送消息通知🚫\n');
       resolve()
     }
   })
@@ -370,7 +370,7 @@ function CoolPush(text, desp) {
           } else {
             data = JSON.parse(data);
             if (data.code === 200) {
-              console.log(`酷推发送${pushMode(QQ_MODE)}通知消息成功🎉\n`)
+              console.log(`\n\n酷推发送${pushMode(QQ_MODE)}通知消息成功🎉\n`)
             } else if (data.code === 400) {
               console.log(`QQ酷推(Cool Push)发送${pushMode(QQ_MODE)}推送失败：${data.msg}\n`)
             } else if (data.code === 503) {
@@ -386,7 +386,7 @@ function CoolPush(text, desp) {
         }
       })
     } else {
-      console.log('您未提供酷推的SKEY，取消QQ推送消息通知🚫\n');
+      // console.log('您未提供酷推的SKEY，取消QQ推送消息通知🚫\n');
       resolve()
     }
   })
@@ -410,7 +410,7 @@ function BarkNotify(text, desp, params={}) {
           } else {
             data = JSON.parse(data);
             if (data.code === 200) {
-              console.log('Bark APP发送通知消息成功🎉\n')
+              console.log('\n\nBark APP发送通知消息成功🎉\n')
             } else {
               console.log(`${data.message}\n`);
             }
@@ -422,7 +422,7 @@ function BarkNotify(text, desp, params={}) {
         }
       })
     } else {
-      console.log('您未提供Bark的APP推送BARK_PUSH，取消Bark推送消息通知🚫\n');
+      // console.log('您未提供Bark的APP推送BARK_PUSH，取消Bark推送消息通知🚫\n');
       resolve()
     }
   })
@@ -460,7 +460,7 @@ function tgBotNotify(text, desp) {
           } else {
             data = JSON.parse(data);
             if (data.ok) {
-              console.log('Telegram发送通知消息成功🎉。\n')
+              console.log('\n\nTelegram发送通知消息成功🎉。\n')
             } else if (data.error_code === 400) {
               console.log('请主动给bot发送一条消息并检查接收用户ID是否正确。\n')
             } else if (data.error_code === 401){
@@ -474,7 +474,7 @@ function tgBotNotify(text, desp) {
         }
       })
     } else {
-      console.log('您未提供telegram机器人推送所需的TG_BOT_TOKEN和TG_USER_ID，取消telegram推送消息通知🚫\n');
+      // console.log('您未提供telegram机器人推送所需的TG_BOT_TOKEN和TG_USER_ID，取消telegram推送消息通知🚫\n');
       resolve()
     }
   })
@@ -509,7 +509,7 @@ function ddBotNotify(text, desp) {
           } else {
             data = JSON.parse(data);
             if (data.errcode === 0) {
-              console.log('钉钉发送通知消息成功🎉。\n')
+              console.log('\n\n钉钉发送通知消息成功🎉。\n')
             } else {
               console.log(`${data.errmsg}\n`)
             }
@@ -541,7 +541,7 @@ function ddBotNotify(text, desp) {
         }
       })
     } else {
-      console.log('您未提供钉钉机器人推送所需的DD_BOT_TOKEN或者DD_BOT_SECRET，取消钉钉推送消息通知🚫\n');
+      // console.log('您未提供钉钉机器人推送所需的DD_BOT_TOKEN或者DD_BOT_SECRET，取消钉钉推送消息通知🚫\n');
       resolve()
     }
   })
@@ -571,7 +571,7 @@ function qywxBotNotify(text, desp) {
           } else {
             data = JSON.parse(data);
             if (data.errcode === 0) {
-              console.log('企业微信发送通知消息成功🎉。\n');
+              console.log('\n\n企业微信发送通知消息成功🎉。\n');
             } else {
               console.log(`${data.errmsg}\n`);
             }
@@ -583,7 +583,7 @@ function qywxBotNotify(text, desp) {
         }
       });
     } else {
-      console.log('您未提供企业微信机器人推送所需的QYWX_KEY，取消企业微信推送消息通知🚫\n');
+      // console.log('您未提供企业微信机器人推送所需的QYWX_KEY，取消企业微信推送消息通知🚫\n');
       resolve();
     }
   });
@@ -698,7 +698,7 @@ function qywxamNotify(text, desp) {
             } else {
               data = JSON.parse(data);
               if (data.errcode === 0) {
-                console.log('成员ID:' + ChangeUserId(desp) + '企业微信应用消息发送通知消息成功🎉。\n');
+                console.log('\n\n成员ID:' + ChangeUserId(desp) + '企业微信应用消息发送通知消息成功🎉。\n');
               } else {
                 console.log(`${data.errmsg}\n`);
               }
@@ -711,7 +711,7 @@ function qywxamNotify(text, desp) {
         });
       });
     } else {
-      console.log('您未提供企业微信应用消息推送所需的QYWX_AM，取消企业微信应用消息推送消息通知🚫\n');
+      // console.log('您未提供企业微信应用消息推送所需的QYWX_AM，取消企业微信应用消息推送消息通知🚫\n');
       resolve();
     }
   });
@@ -743,7 +743,7 @@ function iGotNotify(text, desp, params={}){
           } else {
             if(typeof data === 'string') data = JSON.parse(data);
             if (data.ret === 0) {
-              console.log('iGot发送通知消息成功🎉\n')
+              console.log('\n\niGot发送通知消息成功🎉\n')
             } else {
               console.log(`iGot发送通知消息失败：${data.errMsg}\n`)
             }
@@ -755,7 +755,7 @@ function iGotNotify(text, desp, params={}){
         }
       })
     } else {
-      console.log('您未提供iGot的推送IGOT_PUSH_KEY，取消iGot推送消息通知🚫\n');
+      // console.log('您未提供iGot的推送IGOT_PUSH_KEY，取消iGot推送消息通知🚫\n');
       resolve()
     }
   })
@@ -787,7 +787,7 @@ function pushPlusNotify(text, desp) {
           } else {
             data = JSON.parse(data);
             if (data.code === 200) {
-              console.log(`push+发送${PUSH_PLUS_USER ? '一对多' : '一对一'}通知消息完成。\n`)
+              console.log(`\n\npush+发送${PUSH_PLUS_USER ? '一对多' : '一对一'}通知消息完成🎉\n`)
             } else {
               console.log(`push+发送${PUSH_PLUS_USER ? '一对多' : '一对一'}通知消息失败：${data.msg}\n`)
             }
@@ -799,7 +799,7 @@ function pushPlusNotify(text, desp) {
         }
       })
     } else {
-      console.log('您未提供push+推送所需的PUSH_PLUS_TOKEN，取消push+推送消息通知🚫\n');
+      // console.log('您未提供push+推送所需的PUSH_PLUS_TOKEN，取消push+推送消息通知🚫\n');
       resolve()
     }
   })
