@@ -6,7 +6,7 @@
 ============Quantumultx===============
 [task_local]
 #京东超级盒子
-17 2,15 9-25 1 * jd_cjhz.js
+24 3,13 * * * https://raw.githubusercontent.com/msechen/script/main/jd_cjhz.js, tag=京东超级盒子, img-url=https://github.com/58xinian/icon/raw/master/jdgc.png, enabled=true
 
 ================Loon==============
 [Script]
@@ -84,7 +84,19 @@ const JD_API_HOST = `https://api.m.jd.com/client.action`;
                     await $.wait(1000);
                 }
             }
-            
+        }
+    }
+    for (let i = 0; i < cookiesArr.length; i++) {
+        cookie = cookiesArr[i];
+        if (cookie) {
+            $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+            $.index = i + 1;
+            $.isLogin = true;
+            $.nickName = '';
+            if (!$.isLogin) {
+                $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
+                continue
+            }            
             //开箱
             console.log(`京东账号${$.index}去开箱`)
             for (let y = 0; y < $.lotteryNumber; y++) {
@@ -99,7 +111,6 @@ const JD_API_HOST = `https://api.m.jd.com/client.action`;
     .finally(() => $.done())
 
 async function main() {
-    $.unLogin = false
     await superboxSupBoxHomePage({ "taskId": "", "linkId": "Ll3Qb2mhCXSEWxruhv8qIw", "encryptPin": "" })
     console.log(`【京东账号${$.index}】${$.nickName || $.UserName}互助码：${$.encryptPin}`)
     await $.wait(1000);
@@ -113,17 +124,14 @@ async function main() {
             };
             if (["BROWSE_SHOP"].includes($.oneTask.taskType) && $.oneTask.taskFinished === false) {
                 await apTaskDetail({ "taskId": $.oneTask.id, "taskType": $.oneTask.taskType, "channel": 4, "linkId": "Ll3Qb2mhCXSEWxruhv8qIw", "encryptPin": "7pcfSWHrAG9MKu3RKLl127VL5L4aIE1sZ1eRRdphpl8" });
-                if ($.unLogin) return
                 await $.wait(1000)
-                if ($.doList && $.doList.status) {
-                    for (let y = 0; y < ($.doList.status.finishNeed - $.doList.status.userFinishedTimes); y++) {
-                        $.startList = $.doList.taskItemList[y];
-                        $.itemName = $.doList.taskItemList[y].itemName;
-                        console.log(`去浏览${$.itemName}`)
-                        await apDoTask({ "taskId": $.allList[i].id, "taskType": $.allList[i].taskType, "channel": 4, "itemId": $.startList.itemId, "linkId": "Ll3Qb2mhCXSEWxruhv8qIw", "encryptPin": "7pcfSWHrAG9MKu3RKLl127VL5L4aIE1sZ1eRRdphpl8" })
-                        await $.wait(1000)
-                    }
-                } else return
+                for (let y = 0; y < ($.doList.status.finishNeed - $.doList.status.userFinishedTimes); y++) {
+                    $.startList = $.doList.taskItemList[y];
+                    $.itemName = $.doList.taskItemList[y].itemName;
+                    console.log(`去浏览${$.itemName}`)
+                    await apDoTask({ "taskId": $.allList[i].id, "taskType": $.allList[i].taskType, "channel": 4, "itemId": $.startList.itemId, "linkId": "Ll3Qb2mhCXSEWxruhv8qIw", "encryptPin": "7pcfSWHrAG9MKu3RKLl127VL5L4aIE1sZ1eRRdphpl8" })
+                    await $.wait(1000)
+                }
             }
         }
     } else {
@@ -199,10 +207,7 @@ function apTaskDetail(body) {
                         $.doList = data.data
                         //console.log(JSON.stringify($.doList));
                     } else {
-                        if (data.errMsg && data.errMsg == "未登录") {
-                            console.log(`账号好像失效了\n`);
-                            $.unLogin = true
-                        } else console.log(`apTaskDetail错误：${JSON.stringify(data)}\n`);
+                        console.log(`apTaskDetail错误：${JSON.stringify(data)}\n`);
                     }
                 }
             } catch (e) {

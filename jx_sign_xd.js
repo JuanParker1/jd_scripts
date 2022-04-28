@@ -7,7 +7,7 @@ cron 30 2,9 * * * jx_sign_xd.js
 ============Quantumultx===============
 [task_local]
 #京喜签到-喜豆
-30 2,9 * * * jx_sign_xd.js
+30 2,9 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jx_sign_xd.js, tag=京喜签到-喜豆, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
 
 ================Loon==============
 [Script]

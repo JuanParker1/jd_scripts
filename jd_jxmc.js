@@ -34,6 +34,13 @@ $.inviteCodeList = [];
 let cookiesArr = [];
 let UA, token, UAInfo = {}
 $.appId = 10028;
+function oc(fn, defaultVal) {//optioanl chaining
+  try {
+    return fn()
+  } catch (e) {
+    return undefined
+  }
+}
 let cardinfo = {
   "16": "小黄鸡",
   "17": "辣子鸡",
@@ -103,12 +110,13 @@ if ($.isNode()) {
     await pasture();
     await $.wait(2000);
   }
-  $.res = await getAuthorShareCode('https://raw.githubusercontent.com/Aaron-lv/updateTeam/master/shareCodes/jxmc.json')
+  $.res = await getAuthorShareCode('https://gitee.com/fatelight/Code/raw/master/jxmc.json')
   if (!$.res) {
-    $.http.get({url: 'https://purge.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jxmc.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
+    $.http.get({url: 'https://gitee.com/fatelight/Code/raw/master/jxmc.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
     await $.wait(1000)
     $.res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jxmc.json')
   }
+  $.res = [...($.res || []), ...(await getAuthorShareCode('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/jxmc2.json') || [])]
   await shareCodesFormat()
   for (let i = 0; i < cookiesArr.length; i++) {
     $.cookie = cookiesArr[i];
@@ -157,26 +165,30 @@ async function pasture() {
         console.log(`\n温馨提示：${$.UserName} 请先手动完成【新手指导任务】再运行脚本再运行脚本\n`);
         return;
       }
-      $.currentStep = $.homeInfo?.finishedtaskId
-      console.log(`打印新手流程进度：当前进度：${$.currentStep}，下一流程：${$.homeInfo.maintaskId}`)
-      if ($.homeInfo.maintaskId !== "pause" || isNew($.currentStep)) {
-        console.log(`开始初始化`)
-        $.step = isNew($.currentStep) ? isNew($.currentStep, true) : $.homeInfo.maintaskId
-        await takeGetRequest('DoMainTask');
-        for (let i = 0; i < 20; i++) {
-          if ($.DoMainTask.maintaskId !== "pause") {
-            await $.wait(2000)
-            $.currentStep = $.DoMainTask?.finishedtaskId
-            $.step = $.DoMainTask.maintaskId
-            await takeGetRequest('DoMainTask');
-          } else if (isNew($.currentStep)) {
-            $.step = isNew($.currentStep, true)
-            await takeGetRequest('DoMainTask');
-          } else {
-            console.log(`初始化成功\n`)
-            break
+      try {
+        $.currentStep = oc(() => $.homeInfo.finishedtaskId)
+        console.log(`打印新手流程进度：当前进度：${$.currentStep}，下一流程：${$.homeInfo.maintaskId}`)
+        if ($.homeInfo.maintaskId !== "pause" || isNew($.currentStep)) {
+          console.log(`开始初始化`)
+          $.step = isNew($.currentStep) ? isNew($.currentStep, true) : $.homeInfo.maintaskId
+          await takeGetRequest('DoMainTask');
+          for (let i = 0; i < 20; i++) {
+            if ($.DoMainTask.maintaskId !== "pause") {
+              await $.wait(2000)
+              $.currentStep = oc(() => $.DoMainTask.finishedtaskId)
+              $.step = $.DoMainTask.maintaskId
+              await takeGetRequest('DoMainTask');
+            } else if (isNew($.currentStep)) {
+              $.step = isNew($.currentStep, true)
+              await takeGetRequest('DoMainTask');
+            } else {
+              console.log(`初始化成功\n`)
+              break
+            }
           }
         }
+      } catch (e) {
+        console.warn('活动初始化错误')
       }
       console.log('获取活动信息成功');
       console.log(`互助码：${$.homeInfo.sharekey}`);
@@ -194,7 +206,7 @@ async function pasture() {
           }
         }
       }
-      const petNum = ($.homeInfo?.petinfo || []).length
+      const petNum = (oc(() => $.homeInfo.petinfo) || []).length
       await takeGetRequest('GetCardInfo');
       if ($.GetCardInfo && $.GetCardInfo.cardinfo) {
         let msg = '';
@@ -650,7 +662,7 @@ function dealReturn(type, data) {
         $.homeInfo = data.data;
         $.activeid = $.homeInfo.activeid
         $.activekey = $.homeInfo.activekey || null
-        $.coins = $.homeInfo?.coins || 0;
+        $.coins = oc(() => $.homeInfo.coins) || 0;
         if ($.homeInfo.giftcabbagevalue) {
           console.log(`登陆获得白菜：${$.homeInfo.giftcabbagevalue} 颗`);
         }
@@ -1019,7 +1031,7 @@ async function requestAlgo() {
       "expandParams": ""
     })
   }
-  new Promise(async resolve => {
+  return new Promise(async resolve => {
     $.post(options, (err, resp, data) => {
       try {
         if (err) {
